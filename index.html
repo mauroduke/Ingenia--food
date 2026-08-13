@@ -1328,7 +1328,7 @@
             <h3>Manejo de residuos sólidos y líquidos</h3>
             <p>Clasificación, separación y disposición correcta de residuos y manejo de trampa de grasas.</p>
             <div class="course-meta"><span>35 min</span><span>Básico</span></div>
-            <a href="https://docs.google.com/forms/u/2/d/1FR-TGiybvj_XDmIB2acWbkOZBONVZpE1eiN_ln58NZE/edit?usp=drivesdk" target="_blank" rel="noreferrer" class="btn btn-secondary">Empezar</a>
+            <button onclick="openResiduosModal()" class="btn btn-secondary">Empezar</button>
           </article>
 
           <article class="course-card">
@@ -1336,7 +1336,7 @@
             <h3>Costeo de recetas: fundamentos</h3>
             <p>Cómo calcular costo por porción, margen y aplicar ingeniería de menú a una carta.</p>
             <div class="course-meta"><span>50 min</span><span>Intermedio</span></div>
-            <a href="#contacto" class="btn btn-secondary">Solicitar</a>
+            <button onclick="openCosteoModal()" class="btn btn-secondary">Solicitar</button>
           </article>
         </div>
       </div>
@@ -1471,6 +1471,122 @@
     </div>
   </div>
 
+  <!-- Modal de Capacitación Residuos -->
+  <div id="residuosModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2>Manejo de Residuos</h2>
+          <div class="progress-indicator" id="readProgressResiduos">Lectura en progreso...</div>
+        </div>
+        <button class="modal-close" onclick="closeResiduosModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBodyResiduos">
+        <h3>Importancia del manejo de residuos</h3>
+        <p>El manejo inadecuado de residuos en establecimientos de alimentos es una de las principales causas de contaminación y proliferación de plagas. Un buen programa de gestión de residuos es fundamental para mantener la higiene y la inocuidad alimentaria.</p>
+
+        <h3>Clasificación de residuos</h3>
+        <p><strong>Residuos Orgánicos:</strong> Restos de alimentos, cáscaras, huesos, etc. Deben manejarse en contenedores específicos y eliminarse diariamente.</p>
+        <p><strong>Residuos Inorgánicos:</strong> Plásticos, vidrios, cartón, metales. Deben separarse para reciclaje cuando sea posible.</p>
+        <p><strong>Residuos Peligrosos:</strong> Aceites de cocina, desinfectantes, productos químicos. Requieren manejo especial y disposición adecuada.</p>
+
+        <h3>Procedimiento de separación</h3>
+        <ul>
+          <li>Usar contenedores diferenciados por tipo de residuo</li>
+          <li>Etiquetar claramente cada contenedor</li>
+          <li>Mantener los contenedores cerrados para evitar plagas</li>
+          <li>Capacitar al personal sobre clasificación correcta</li>
+          <li>Realizar auditorías periódicas</li>
+        </ul>
+
+        <h3>Manejo de trampa de grasas</h3>
+        <p>La trampa de grasas es un dispositivo esencial en cocinas para evitar que grasas y aceites obstruyan las tuberías. Debe:</p>
+        <ul>
+          <li>Vaciarse regularmente (mínimo 2 veces por semana)</li>
+          <li>Limpiarse y desinfectarse adecuadamente</li>
+          <li>Inspeccionarse periódicamente</li>
+          <li>Documentarse el mantenimiento</li>
+        </ul>
+
+        <h3>Disposición final de residuos</h3>
+        <p>Los residuos deben disponerse según regulaciones locales. Esto puede incluir recogida por empresa autorizada, reciclaje, o compostaje. Mantén registros de disposición para cumplir con normativas ambientales y sanitarias.</p>
+
+        <h3>Beneficios de un buen manejo</h3>
+        <ul>
+          <li>Reducción de plagas y roedores</li>
+          <li>Mejora de higiene en la cocina</li>
+          <li>Cumplimiento de normas sanitarias</li>
+          <li>Impacto positivo ambiental</li>
+          <li>Reducción de costos operativos</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeResiduosModal()" class="btn btn-secondary">Cancelar</button>
+        <a id="evalBtnResiduos" href="https://docs.google.com/forms/u/2/d/1FR-TGiybvj_XDmIB2acWbkOZBONVZpE1eiN_ln58NZE/edit?usp=drivesdk" target="_blank" rel="noreferrer" class="btn btn-primary btn-disable">Ir a evaluación</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Capacitación Costeo -->
+  <div id="costeoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2>Costeo de Recetas</h2>
+          <div class="progress-indicator" id="readProgressCosteo">Lectura en progreso...</div>
+        </div>
+        <button class="modal-close" onclick="closeCosteoModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBodyCosteo">
+        <h3>¿Por qué es importante costear recetas?</h3>
+        <p>El costeo de recetas es fundamental para la rentabilidad de cualquier negocio gastronómico. Permite conocer exactamente cuánto cuesta producir cada plato y establecer precios que aseguren ganancias mientras se mantiene competitividad en el mercado.</p>
+
+        <h3>Componentes del costo</h3>
+        <p><strong>Costo de Ingredientes:</strong> El valor de todas las materias primas utilizadas en la preparación.</p>
+        <p><strong>Costo de Mano de Obra:</strong> Los salarios y beneficios del personal de cocina.</p>
+        <p><strong>Costo Indirecto:</strong> Servicios (agua, luz, gas), mantenimiento, equipos y otros gastos operativos.</p>
+
+        <h3>Cálculo de costo por porción</h3>
+        <p>El proceso es simple:</p>
+        <ul>
+          <li>Sumar todos los costos de ingredientes de la receta</li>
+          <li>Dividir entre el número de porciones</li>
+          <li>Resultado = Costo unitario por porción</li>
+        </ul>
+
+        <h3>Margen de ganancia</h3>
+        <p>El margen es la ganancia que obtienes. Se calcula así:</p>
+        <p><strong>Precio de venta = Costo ÷ (1 - Margen deseado)</strong></p>
+        <p>Por ejemplo, si el costo es $5 y quieres 60% de margen: Precio = $5 ÷ 0.40 = $12.50</p>
+
+        <h3>Ingeniería de menú</h3>
+        <p>Es la estrategia de optimizar la rentabilidad del menú basándose en:</p>
+        <ul>
+          <li>Popularidad de los platos (frecuencia de venta)</li>
+          <li>Margen de ganancia de cada uno</li>
+          <li>Posicionamiento en el menú</li>
+          <li>Ingredientes compartidos para reducir costos</li>
+        </ul>
+
+        <h3>Herramientas de control</h3>
+        <ul>
+          <li>Fichas técnicas con receta y costo</li>
+          <li>Análisis de costo por plato</li>
+          <li>Matriz de popularidad vs. rentabilidad</li>
+          <li>Revisión periódica de precios de proveedores</li>
+          <li>Control de desperdicios</li>
+        </ul>
+
+        <h3>Mejora continua</h3>
+        <p>Revisa regularmente tus costos, especialmente cuando suben los precios de ingredientes. Considera mejoras en porciones, presentación, o recetas para mantener márgenes saludables sin afectar la calidad.</p>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeCosteoModal()" class="btn btn-secondary">Cancelar</button>
+        <a id="evalBtnCosteo" href="#contacto" class="btn btn-primary btn-disable">Solicitar evaluación</a>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-row">
       <div class="footer-brand">Ingenia Food</div>
@@ -1554,6 +1670,149 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && bpmModalOpened) {
         closeBpmModal();
+      }
+    });
+
+    // ===== Residuos Training Modal Control =====
+    let residuosModalOpened = false;
+    let residuosContentRead = false;
+    const modalBodyResiduos = document.getElementById('modalBodyResiduos');
+    const evalBtnResiduos = document.getElementById('evalBtnResiduos');
+    const progressIndicatorResiduos = document.getElementById('readProgressResiduos');
+
+    modalBodyResiduos.addEventListener('scroll', function() {
+      const scrollHeight = modalBodyResiduos.scrollHeight;
+      const scrollTop = modalBodyResiduos.scrollTop;
+      const clientHeight = modalBodyResiduos.clientHeight;
+      const scrollPercentage = ((scrollTop + clientHeight) / scrollHeight) * 100;
+
+      if (scrollPercentage >= 80 && !residuosContentRead) {
+        residuosContentRead = true;
+        enableEvaluationButtonResiduos();
+      }
+
+      const percentage = Math.min(100, Math.round(scrollPercentage));
+      progressIndicatorResiduos.textContent = `Progreso: ${percentage}%`;
+      
+      if (residuosContentRead) {
+        progressIndicatorResiduos.textContent = '✓ Contenido completado - Puedes acceder a la evaluación';
+        progressIndicatorResiduos.style.background = 'rgba(26, 93, 82, 0.15)';
+        progressIndicatorResiduos.style.color = '#1a5d52';
+      }
+    });
+
+    function openResiduosModal() {
+      const modal = document.getElementById('residuosModal');
+      modal.classList.add('active');
+      residuosModalOpened = true;
+      residuosContentRead = false;
+      progressIndicatorResiduos.textContent = 'Lectura en progreso...';
+      progressIndicatorResiduos.style.background = 'rgba(242, 102, 45, 0.1)';
+      progressIndicatorResiduos.style.color = 'var(--gold)';
+      resetEvaluationButtonResiduos();
+      modalBodyResiduos.scrollTop = 0;
+    }
+
+    function closeResiduosModal() {
+      const modal = document.getElementById('residuosModal');
+      modal.classList.remove('active');
+      residuosModalOpened = false;
+    }
+
+    function enableEvaluationButtonResiduos() {
+      evalBtnResiduos.classList.remove('btn-disable');
+      evalBtnResiduos.style.cursor = 'pointer';
+      evalBtnResiduos.style.opacity = '1';
+    }
+
+    function resetEvaluationButtonResiduos() {
+      evalBtnResiduos.classList.add('btn-disable');
+      evalBtnResiduos.style.cursor = 'not-allowed';
+      evalBtnResiduos.style.opacity = '0.6';
+    }
+
+    document.getElementById('residuosModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeResiduosModal();
+      }
+    });
+
+    // ===== Costeo Training Modal Control =====
+    let costeoModalOpened = false;
+    let costeoContentRead = false;
+    const modalBodyCosteo = document.getElementById('modalBodyCosteo');
+    const evalBtnCosteo = document.getElementById('evalBtnCosteo');
+    const progressIndicatorCosteo = document.getElementById('readProgressCosteo');
+
+    modalBodyCosteo.addEventListener('scroll', function() {
+      const scrollHeight = modalBodyCosteo.scrollHeight;
+      const scrollTop = modalBodyCosteo.scrollTop;
+      const clientHeight = modalBodyCosteo.clientHeight;
+      const scrollPercentage = ((scrollTop + clientHeight) / scrollHeight) * 100;
+
+      if (scrollPercentage >= 80 && !costeoContentRead) {
+        costeoContentRead = true;
+        enableEvaluationButtonCosteo();
+      }
+
+      const percentage = Math.min(100, Math.round(scrollPercentage));
+      progressIndicatorCosteo.textContent = `Progreso: ${percentage}%`;
+      
+      if (costeoContentRead) {
+        progressIndicatorCosteo.textContent = '✓ Contenido completado - Puedes acceder a la evaluación';
+        progressIndicatorCosteo.style.background = 'rgba(26, 93, 82, 0.15)';
+        progressIndicatorCosteo.style.color = '#1a5d52';
+      }
+    });
+
+    function openCosteoModal() {
+      const modal = document.getElementById('costeoModal');
+      modal.classList.add('active');
+      costeoModalOpened = true;
+      costeoContentRead = false;
+      progressIndicatorCosteo.textContent = 'Lectura en progreso...';
+      progressIndicatorCosteo.style.background = 'rgba(242, 102, 45, 0.1)';
+      progressIndicatorCosteo.style.color = 'var(--gold)';
+      resetEvaluationButtonCosteo();
+      modalBodyCosteo.scrollTop = 0;
+    }
+
+    function closeCosteoModal() {
+      const modal = document.getElementById('costeoModal');
+      modal.classList.remove('active');
+      costeoModalOpened = false;
+    }
+
+    function enableEvaluationButtonCosteo() {
+      evalBtnCosteo.classList.remove('btn-disable');
+      evalBtnCosteo.style.cursor = 'pointer';
+      evalBtnCosteo.style.opacity = '1';
+    }
+
+    function resetEvaluationButtonCosteo() {
+      evalBtnCosteo.classList.add('btn-disable');
+      evalBtnCosteo.style.cursor = 'not-allowed';
+      evalBtnCosteo.style.opacity = '0.6';
+    }
+
+    document.getElementById('costeoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCosteoModal();
+      }
+    });
+
+    // Close modals with Escape key - Extended
+    const allModalsOpened = {
+      bpm: () => bpmModalOpened,
+      residuos: () => residuosModalOpened,
+      costeo: () => costeoModalOpened
+    };
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        if (bpmModalOpened) closeBpmModal();
+        if (residuosModalOpened) closeResiduosModal();
+        if (costeoModalOpened) closeCosteoModal();
       }
     });
   </script>

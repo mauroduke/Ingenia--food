@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 180" role="img" aria-labelledby="title desc">
+  <title id="title">Ingenia Food</title>
+  <desc id="desc">Ingenia Food, consultoria y capacitacion para empresas de alimentos</desc>
+  <g transform="translate(8 8)">
+    <circle cx="82" cy="82" r="74" fill="#F26522"/>
+    <path d="M82 42v73M58 115h48" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <path d="M48 61c10-13 22-19 34-19 15 0 28 8 39 24" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M48 126c19 13 48 13 68 0" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <text x="182" y="88" fill="#18352D" font-family="Georgia, serif" font-size="52" font-weight="700" letter-spacing="-1">Ingenia</text>
+  <text x="410" y="88" fill="#F26522" font-family="Georgia, serif" font-size="52" font-weight="700">Food</text>
+  <path d="M184 106h350" stroke="#E7D6C9" stroke-width="2"/>
+  <text x="184" y="134" fill="#50665F" font-family="Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="2.4">CONSULTORIA ALIMENTARIA</text>
+</svg>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingenia Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FFF9F4;
+      --bg-card: #FFFFFF;
+      --ink: #18352D;
+      --ink-soft: #50665F;
+      --ink-faint: #86948C;
+      --gold: #F26522;
+      --gold-dark: #D94D17;
+      --steel: #467267;
+      --clay: #C84B32;
+      --line: #E7D6C9;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header, footer, section { width: 100%; }
+    .page-wrapper { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .topbar { position: sticky; top: 0; z-index: 50; background: rgba(255,249,244,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; flex-wrap: wrap; }
+    .brand { display: inline-flex; align-items: center; color: var(--ink); }
+    .brand-mark { width: 184px; height: auto; }
+
+    .nav-links { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+    .nav-links button { border: none; background: none; cursor: pointer; font: inherit; color: var(--ink-soft); font-weight: 500; padding: 0; }
+    .nav-links button.active { color: var(--gold); font-weight: 600; }
+    .button { display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font: 600 0.9rem 'Inter', sans-serif; border-radius: 4px; padding: 12px 20px; transition: transform .15s, opacity .15s; }
+    .button:hover { opacity: 0.9; }
+    .button-primary { background: var(--ink); color: #fff; }
+    .button-gold { background: var(--gold); color: #fff; }
+    .button-outline { background: transparent; border: 1px solid var(--ink); color: var(--ink); }
+
+    .hero { padding: 90px 0 60px; display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 64px; align-items: center; }
+    .eyebrow { display: inline-block; font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.75rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 14px; }
+    .hero h1 { margin: 0; font-family: 'Fraunces', Georgia, serif; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.05; font-weight: 600; }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p { margin: 24px 0 0; max-width: 560px; color: var(--ink-soft); font-size: 1rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .hero-card { padding: 28px; border-radius: 20px; width: min(100%, 430px); background: #fff; border: 1px solid var(--line); display: grid; place-items: center; }
+    .hero-logo { width: 100%; height: auto; }
+
+    .section { padding: 40px 0 80px; }
+    .section-title { font-family: 'Fraunces', Georgia, serif; font-size: 2rem; margin: 0 0 30px; color: var(--ink); }
+    .cards-grid, .services-grid, .features-grid, .courses-grid, .cities-grid { display: grid; gap: 16px; }
+
+    .cards-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .card, .service-card, .course-card, .city-card, .info-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .card h3, .service-card h3, .course-card h3 { margin: 14px 0 0; font-size: 1rem; color: var(--ink); }
+    .card button, .course-card button { margin-top: 14px; border: none; background: none; color: var(--gold); cursor: pointer; font-weight: 600; padding: 0; }
+    .card svg, .service-card svg { color: var(--steel); }
+    .service-item { display: grid; grid-template-columns: 60px 1fr 1.4fr; gap: 24px; align-items: start; padding: 30px 0; border-top: 1px solid var(--line); }
+    .service-item:first-child { border-top: none; }
+    .service-index { font-family: 'JetBrains Mono', monospace; color: var(--ink-faint); font-size: 0.86rem; }
+    .service-title { display: flex; align-items: flex-start; gap: 12px; font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); }
+
+    .section-intro { max-width: 720px; color: var(--ink-soft); font-size: 1rem; }
+    .split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .info-card { padding: 26px; }
+    .info-card .info-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--steel); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+    .info-card p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+    .info-card.alt { border-color: transparent; background: var(--ink); color: #fff; }
+    .info-card.alt .info-label { color: var(--gold); }
+
+    .course-card .course-meta { display: flex; gap: 14px; margin-top: 16px; font-size: 0.92rem; color: var(--ink-faint); }
+    .course-card .course-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+    .cities-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .city-card { display: flex; align-items: center; gap: 12px; border-radius: 10px; }
+    .city-marker { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #fff; display: grid; place-items: center; font-size: 0.95rem; }
+
+    .contact-form { display: grid; gap: 14px; }
+    .contact-form input,
+    .contact-form textarea { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+
+    footer { border-top: 1px solid var(--line); background: var(--ink); color: #fff; padding: 40px 0; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px; align-items: flex-start; }
+    .footer-links { display: flex; gap: 36px; flex-wrap: wrap; font-size: 0.95rem; }
+    .footer-links button { background: none; border: none; color: rgba(255,255,255,0.85); cursor: pointer; padding: 0; font: inherit; }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .nav-inner { justify-content: center; }
+      .nav-links { width: 100%; justify-content: center; }
+      .hero { gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page-wrapper nav-inner">
+      <a href="#inicio" class="brand">
+        <img class="brand-mark" src="ingenia-food-logo.svg" alt="Ingenia Food" />
+      </a>
+      <nav class="nav-links">
+        <button onclick="location.href='#inicio'" class="active">Inicio</button>
+        <button onclick="location.href='#quienes'">Quiénes somos</button>
+        <button onclick="location.href='#servicios'">Servicios</button>
+        <button onclick="location.href='#capacitaciones'">Capacitaciones</button>
+        <button onclick="location.href='#donde'">Dónde estamos</button>
+        <button onclick="location.href='#contacto'">Contacto</button>
+      </nav>
+      <button class="button button-gold" onclick="location.href='#contacto'">Contáctanos</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero page-wrapper">
+      <div>
+        <div class="eyebrow">Consultoría · Capacitación · Alimentos</div>
+        <h1>Transformamos el conocimiento en <em>mejores procesos</em> para tu empresa de alimentos.</h1>
+        <p>Acompañamos a empresas del sector gastronómico en procesos de capacitación, estandarización, calidad, costos, BPM y administración.</p>
+        <div class="hero-actions">
+          <button class="button button-gold" onclick="location.href='#servicios'">Conoce nuestros servicios →</button>
+          <button class="button button-outline" onclick="location.href='#capacitaciones'">Accede a nuestras capacitaciones</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img class="hero-logo" src="ingenia-food-logo.svg" alt="Logo de Ingenia Food" />
+      </div>
+    </section>
+
+    <section class="section page-wrapper">
+      <div class="eyebrow">¿Qué hacemos?</div>
+      <h2 class="section-title">Diez frentes, un mismo objetivo: procesos mejores.</h2>
+      <div class="cards-grid">
+        <article class="card">
+          <div>📋</div>
+          <h3>Capacitación en BPM</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🛡️</div>
+          <h3>Seguridad e inocuidad alimentaria</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🐛</div>
+          <h3>Manejo integrado de plagas</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🗑️</div>
+          <h3>Manejo de residuos</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>📏</div>
+          <h3>Estandarización de productos</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🧮</div>
+          <h3>Costeo de recetas y cartas</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🏢</div>
+          <h3>Administración de establecimientos</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>🔍</div>
+          <h3>Auditorías y diagnóstico</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>👥</div>
+          <h3>Acompañamiento empresarial</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+        <article class="card">
+          <div>📄</div>
+          <h3>Manuales y procedimientos</h3>
+          <button onclick="location.href='#capacitaciones'">Ver capacitación →</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="quienes" class="section page-wrapper">
+      <div class="eyebrow">Quiénes somos</div>
+      <h2 class="section-title">Convertimos el conocimiento técnico en procesos que sí se aplican.</h2>
+      <p class="section-intro">Ingenia Food es una empresa de consultoría y capacitación especializada en el sector de alimentos, enfocada en ayudar a restaurantes, cafeterías, empresas gastronómicas y establecimientos de alimentos a mejorar sus procesos mediante conocimiento práctico, estandarización y acompañamiento. Nuestro trabajo integra aspectos de calidad, inocuidad, operación, administración y rentabilidad. Buscamos que nuestros clientes no solamente conozcan los procedimientos, sino que puedan aplicarlos correctamente en sus operaciones diarias.</p>
+
+      <div class="split-grid" style="margin-top: 50px;">
+        <article class="info-card">
+          <div class="info-label">Conocimiento</div>
+          <p>Capacitación basada en conceptos técnicos y aplicación práctica.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-label">Acompañamiento</div>
+          <p>No solamente entregamos información; acompañamos la implementación.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-label">Estandarización</div>
+          <p>Ayudamos a convertir los procesos en procedimientos claros y medibles.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-label">Rentabilidad</div>
+          <p>Integramos calidad y operación con herramientas de costos y administración.</p>
+        </article>
+      </div>
+
+      <div class="split-grid" style="margin-top: 60px;">
+        <article class="info-card alt">
+          <div class="info-label">Misión</div>
+          <p>Brindar soluciones de consultoría, capacitación y acompañamiento al sector de alimentos, contribuyendo al fortalecimiento de sus procesos, la calidad, la inocuidad y la rentabilidad.</p>
+        </article>
+        <article class="info-card">
+          <div class="info-label">Visión</div>
+          <p>Ser una empresa reconocida en Colombia por transformar el conocimiento técnico en herramientas prácticas que permitan a las empresas de alimentos mejorar continuamente sus procesos y resultados.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="servicios" class="section page-wrapper">
+      <div class="eyebrow">Servicios</div>
+      <h2 class="section-title">Nuestros servicios</h2>
+      <div class="services-grid">
+        <article class="service-item">
+          <div class="service-index">01</div>
+          <div class="service-title"><span>📋</span> Consultoría en BPM</div>
+          <div class="service-tags">
+            <span class="tag">Diagnóstico</span>
+            <span class="tag">Auditorías</span>
+            <span class="tag">Planes de acción</span>
+            <span class="tag">Capacitación</span>
+            <span class="tag">Seguimiento</span>
+            <span class="tag">Implementación de procedimientos</span>
+          </div>
+        </article>
+        <article class="service-item">
+          <div class="service-index">02</div>
+          <div class="service-title"><span>📏</span> Estandarización de productos</div>
+          <div class="service-tags">
+            <span class="tag">Recetas estándar</span>
+            <span class="tag">Fichas técnicas</span>
+            <span class="tag">Porcionamiento</span>
+            <span class="tag">Rendimientos</span>
+            <span class="tag">Procesos de producción</span>
+            <span class="tag">Control de calidad</span>
+          </div>
+        </article>
+        <article class="service-item">
+          <div class="service-index">03</div>
+          <div class="service-title"><span>🧮</span> Costeo de productos y cartas</div>
+          <div class="service-tags">
+            <span class="tag">Costeo de recetas</span>
+            <span class="tag">Costo por porción</span>
+            <span class="tag">Análisis de precios</span>
+            <span class="tag">Margen</span>
+            <span class="tag">Ingeniería de menú</span>
+            <span class="tag">Construcción de cartas</span>
+          </div>
+        </article>
+        <article class="service-item">
+          <div class="service-index">04</div>
+          <div class="service-title"><span>👩‍🍳</span> Capacitación</div>
+          <div class="service-tags">
+            <span class="tag">BPM</span>
+            <span class="tag">Manipulación de alimentos</span>
+            <span class="tag">Limpieza y desinfección</span>
+            <span class="tag">Manejo de residuos</span>
+            <span class="tag">Control de plagas</span>
+            <span class="tag">Administración</span>
+          </div>
+        </article>
+        <article class="service-item">
+          <div class="service-index">05</div>
+          <div class="service-title"><span>🏢</span> Acompañamiento empresarial</div>
+          <div class="service-tags">
+            <span class="tag">Diagnóstico inicial</span>
+            <span class="tag">Plan de trabajo</span>
+            <span class="tag">Capacitación</span>
+            <span class="tag">Implementación</span>
+            <span class="tag">Seguimiento</span>
+            <span class="tag">Evaluación de resultados</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="capacitaciones" class="section page-wrapper">
+      <div class="eyebrow">Plataforma educativa</div>
+      <h2 class="section-title">Capacitaciones disponibles</h2>
+      <p class="section-intro">Regístrate para inscribirte, avanzar por módulos, presentar la evaluación y obtener tu certificado.</p>
+      <div class="courses-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <article class="course-card">
+          <div class="info-label">BUENAS PRÁCTICAS DE MANUFACTURA</div>
+          <h3>Introducción a las BPM</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Fundamentos de higiene, manipulación y control de temperaturas en establecimientos de alimentos.</p>
+          <div class="course-meta">
+            <span>⏱️ 45 minutos</span>
+            <span>Básico</span>
+          </div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="window.open('https://docs.google.com/forms/u/1/d/1z6wMOgjeK0MvVEPdaYb2jvbutiNypRYUehLkyyglWbc/edit?usp=drivesdk', '_blank')">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">MANEJO DE RESIDUOS</div>
+          <h3>Manejo de residuos sólidos y líquidos</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Clasificación, separación y disposición correcta de residuos, y manejo de trampa de grasas.</p>
+          <div class="course-meta">
+            <span>⏱️ 35 minutos</span>
+            <span>Básico</span>
+          </div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="window.open('https://docs.google.com/forms/u/2/d/1FR-TGiybvj_XDmIB2acWbkOZBONVZpE1eiN_ln58NZE/edit?usp=drivesdk', '_blank')">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">COSTEO DE CARTAS</div>
+          <h3>Costeo de recetas: fundamentos</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Cómo calcular costo por porción, margen y aplicar ingeniería de menú a una carta.</p>
+          <div class="course-meta">
+            <span>⏱️ 50 minutos</span>
+            <span>Intermedio</span>
+          </div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">SEGURIDAD E INOCUIDAD</div>
+          <h3>Fundamentos de inocuidad alimentaria</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Identificación de peligros, prevención de contaminación y controles esenciales para alimentos seguros.</p>
+          <div class="course-meta"><span>⏱️ 40 minutos</span><span>Básico</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">MANEJO INTEGRADO DE PLAGAS</div>
+          <h3>Prevención y control de plagas</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Prevención, inspección y acciones correctivas para controlar plagas en establecimientos de alimentos.</p>
+          <div class="course-meta"><span>⏱️ 35 minutos</span><span>Básico</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">ESTANDARIZACIÓN DE PRODUCTOS</div>
+          <h3>Recetas estándar y fichas técnicas</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Herramientas para documentar recetas, porciones, rendimientos y criterios de calidad.</p>
+          <div class="course-meta"><span>⏱️ 45 minutos</span><span>Intermedio</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">ADMINISTRACIÓN DE ESTABLECIMIENTOS</div>
+          <h3>Administración operativa para alimentos</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Organización de equipos, compras, inventarios y rutinas operativas para establecimientos de alimentos.</p>
+          <div class="course-meta"><span>⏱️ 50 minutos</span><span>Intermedio</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">AUDITORÍAS Y DIAGNÓSTICO</div>
+          <h3>Cómo realizar un diagnóstico sanitario</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Planeación de auditorías, levantamiento de hallazgos y priorización de acciones de mejora.</p>
+          <div class="course-meta"><span>⏱️ 40 minutos</span><span>Intermedio</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">ACOMPAÑAMIENTO EMPRESARIAL</div>
+          <h3>Implementación y mejora continua</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Método para convertir el diagnóstico en un plan de trabajo, seguimiento y resultados medibles.</p>
+          <div class="course-meta"><span>⏱️ 45 minutos</span><span>Intermedio</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+        <article class="course-card">
+          <div class="info-label">MANUALES Y PROCEDIMIENTOS</div>
+          <h3>Diseño de manuales operativos</h3>
+          <p style="margin: 10px 0 0; color: var(--ink-soft);">Principios para documentar procedimientos claros, aplicables y fáciles de actualizar.</p>
+          <div class="course-meta"><span>⏱️ 35 minutos</span><span>Básico</span></div>
+          <button class="button button-outline" style="width:100%; justify-content:center; margin-top:18px;" onclick="location.href='#contacto'">Empezar capacitación</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="donde" class="section page-wrapper">
+      <div class="eyebrow">Cobertura</div>
+      <h2 class="section-title">¿Dónde estamos?</h2>
+      <div class="cities-grid">
+        <article class="city-card"><div class="city-marker">M</div><div>Manizales</div></article>
+        <article class="city-card"><div class="city-marker">P</div><div>Pereira</div></article>
+        <article class="city-card"><div class="city-marker">A</div><div>Armenia</div></article>
+        <article class="city-card"><div class="city-marker">B</div><div>Bogotá</div></article>
+        <article class="city-card"><div class="city-marker">M</div><div>Medellín</div></article>
+      </div>
+      <p style="margin-top: 20px; color: var(--ink-faint); font-size: 0.95rem;">Direcciones específicas se publicarán próximamente.</p>
+    </section>
+
+    <section id="contacto" class="section page-wrapper">
+      <div class="eyebrow">Contacto</div>
+      <h2 class="section-title">Hablemos de tu operación</h2>
+      <div style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <article style="background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 18px;">
+          <div style="font-family: 'Fraunces', Georgia, serif; font-size: 1.1rem; font-weight: 700;">Escríbenos</div>
+          <a href="mailto:ingeniafood.sac@gmail.com" style="display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <path d="M3 5.5C3 4.12 4.12 3 5.5 3h13c1.38 0 2.5 1.12 2.5 2.5v13c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 21 3 19.88 3 18.5v-13Z" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M4.5 6.5 12 12.5l7.5-6" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <div style="font-weight: 600;">Correo</div>
+              <div style="color: var(--ink-soft);">ingeniafood.sac@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://wa.me/573104572080" target="_blank" rel="noreferrer" style="display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <path d="M21.5 2.5 2.5 21.5l2.32-8.67a11.2 11.2 0 0 1-1.2-5.03 11.3 11.3 0 0 1 11.3-11.3c3 0 5.83 1.17 7.95 3.29a11.2 11.2 0 0 1 3.29 7.95Z" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="m16.83 14.58-1.29-.6c-.18-.08-.4-.05-.54.08l-.76.75a5.92 5.92 0 0 1-2.7-2.7l.75-.76c.13-.14.16-.36.08-.54l-.6-1.29a.4.4 0 0 0-.52-.22A5.18 5.18 0 0 0 8.8 11.4a5.18 5.18 0 0 0 4.03 4.03c.22.05.42-.1.52-.3l.48-1.05c.08-.17.05-.37-.08-.5Z" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <div style="font-weight: 600;">WhatsApp</div>
+              <div style="color: var(--ink-soft);">3104572080</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/ingeniafood_/" target="_blank" rel="noreferrer" style="display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <path d="M17 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4Z" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M16.5 8.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" fill="var(--ink-soft)"/>
+              <path d="M7.75 17.5h8.5a1.5 1.5 0 0 0 1.5-1.5v-5.25a1.5 1.5 0 0 0-1.5-1.5h-8.5a1.5 1.5 0 0 0-1.5 1.5v5.25a1.5 1.5 0 0 0 1.5 1.5Zm0-6.75h8.5" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div style="font-weight: 600;">Instagram</div>
+              <div style="color: var(--ink-soft);">@ingeniafood_</div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page-wrapper footer-inner">
+      <div>
+        <div style="font-family: 'Fraunces', Georgia, serif; font-size: 1.15rem; font-weight: 700;">Ingenia Food</div>
+        <div style="max-width: 320px; color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 0.95rem;">Consultoría, capacitación y acompañamiento para el sector de alimentos.</div>
+      </div>
+      <div class="footer-links">
+        <button onclick="location.href='#validar'">Validar certificado</button>
+        <button onclick="location.href='#contacto'">Contacto</button>
+        <button onclick="location.href='#servicios'">Servicios</button>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
